@@ -1,0 +1,23 @@
+# change tabs
+'body':
+  'ctrl-tab': 'pane:show-next-item'
+  'ctrl-tab ^ctrl': 'unset!'
+  'ctrl-shift-tab': 'pane:show-previous-item'
+  'ctrl-shift-tab ^ctrl': 'unset!'
+
+# disable quit
+  'ctrl-q': 'unset!'
+
+# autocomplete-plus
+# disable "Use Core Movement Commands" first
+'body atom-text-editor.autocomplete-active':
+  'ctrl-p': 'autocomplete-plus:move-up'
+  'ctrl-n': 'autocomplete-plus:move-down'
+
+# beautify
+'atom-text-editor':
+  'ctrl-i': 'atom-beautify:beautify-editor'
+
+# force use ESLint Fixer engine provided atom-beautify for js in .vue files
+"atom-text-editor[data-grammar='text html vue']":
+  'ctrl-i': 'atom-beautify:beautify-language-javascript'

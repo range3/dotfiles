@@ -1,0 +1,19 @@
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  show-branch = auto
+  ui = auto
+[alias]
+  st = status
+  co = checkout
+  ci = commit
+[user]
+  name = range3
+  email = white.line.oar@gmail.com
+[core]
+  pager = less
+  excludesfile = ~/.gitignore
+[push]
+  default = upstream

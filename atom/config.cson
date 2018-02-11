@@ -1,0 +1,64 @@
+"*":
+  "atom-beautify":
+    cpp:
+      configPath: "~/.uncrustify.cfg"
+    js:
+      default_beautifier: "ESLint Fixer"
+  "autocomplete-plus":
+    suppressActivationForEditorClasses: [
+      "vim-mode-plus.normal-mode"
+      "vim-mode-plus.visual-mode"
+      "vim-mode-plus.operator-pending-mode"
+      "vim-mode-plus.insert-mode.replace"
+    ]
+    useCoreMovementCommands: false
+  core:
+    disabledPackages: [
+      "markdown-preview"
+    ]
+    packagesWithKeymapsDisabled: []
+    telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "seti-syntax"
+    ]
+  editor:
+    fontFamily: "\"Ricty Diminished\""
+    fontSize: 15
+  "exception-reporting":
+    userId: "00d10b12-5a42-41ef-84e7-32747c9872c3"
+  fonts:
+    fontFamily: "M+ Light"
+  "linter-eslint":
+    ignoreFixableRulesWhileTyping: true
+    scopes: [
+      "source.js"
+      "source.jsx"
+      "source.js.jsx"
+      "source.babel"
+      "source.js-semantic"
+      "text.html.vue"
+    ]
+  "linter-ui-default": {}
+  "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus":
+    useGitHubStyle: true
+  "one-dark-ui": {}
+  "seti-syntax": {}
+  "seti-ui": {}
+  "vim-mode-plus":
+    automaticallyEscapeInsertModeOnActivePaneItemChange: true
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
+    wrapLeftRightMotion: true
+  welcome:
+    showOnStartup: false
+".cpp.source":
+  editor:
+    showIndentGuide: true
+    showInvisibles: false
+    tabLength: 2
+    tabType: "soft"
+".html.text.vue":
+  editor:
+    tabType: "auto"
