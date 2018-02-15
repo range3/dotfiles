@@ -14,7 +14,7 @@ pre-link: ## Run pre-link scripts
 	@$(foreach val, $(wildcard $(DOTPATH)/scripts/pre-link/*.sh), DOTPATH=$(DOTPATH) bash $(val);)
 
 link: ## Create symlinks to the home directory
-	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/.$(val);)
+	@$(foreach val, $(DOTFILES), ln -sfnTv $(abspath $(val)) $(HOME)/.$(val);)
 
 post-link: ## Run post-link scripts
 	@$(foreach val, $(wildcard $(DOTPATH)/scripts/post-link/*.sh), DOTPATH=$(DOTPATH) bash $(val);)
