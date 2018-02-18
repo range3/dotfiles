@@ -29,6 +29,8 @@
     userId: "00d10b12-5a42-41ef-84e7-32747c9872c3"
   fonts:
     fontFamily: "M+ Light"
+  "line-ending-selector":
+    defaultLineEnding: "LF"
   "linter-eslint":
     ignoreFixableRulesWhileTyping: true
     scopes: [
