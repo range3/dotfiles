@@ -4,6 +4,10 @@
       configPath: "~/.uncrustify.cfg"
     js:
       default_beautifier: "ESLint Fixer"
+    markdown:
+      default_beautifier: "Prettier"
+    vue:
+      default_beautifier: "ESLint Fixer"
   "autocomplete-plus":
     suppressActivationForEditorClasses: [
       "vim-mode-plus.normal-mode"
@@ -15,6 +19,7 @@
   core:
     disabledPackages: [
       "markdown-preview"
+      "language-gfm"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -24,11 +29,20 @@
     ]
   editor:
     fontFamily: "\"Ricty Diminished\""
-    fontSize: 15
   "exception-reporting":
     userId: "00d10b12-5a42-41ef-84e7-32747c9872c3"
   fonts:
     fontFamily: "M+ Light"
+  "language-dotenv":
+    dotenvFileNames: [
+      ".env"
+      ".env.example"
+      ".env.development"
+      ".env.production"
+      ".env.test"
+      ".env.defaults"
+      ".env.schema"
+    ]
   "line-ending-selector":
     defaultLineEnding: "LF"
   "linter-eslint":
@@ -49,6 +63,8 @@
   "one-dark-ui": {}
   "seti-syntax": {}
   "seti-ui": {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true
     notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
