@@ -7,16 +7,29 @@
 
 # disable quit
   'ctrl-q': 'unset!'
+# disable close
+  'ctrl-w': 'unset!'
 
-# split pane and move active item
-  'ctrl-k v': 'pane:split-right-and-move-active-item'
-  'ctrl-k s': 'pane:split-down-and-move-active-item'
-
+# prefix ctrl-w
+# close
+  'ctrl-w ctrl-q': 'core:close'
 # focus-pane
+  'ctrl-w ctrl-w': 'window:focus-next-pane'
+  'ctrl-w h': 'window:focus-pane-on-left'
+  'ctrl-w j': 'window:focus-pane-below'
+  'ctrl-w k': 'window:focus-pane-above'
+  'ctrl-w l': 'window:focus-pane-on-right'
+
+# prefix ctrl-k
+# focus-pane
+  'ctrl-k ctrl-k': 'window:focus-next-pane'
   'ctrl-k h': 'window:focus-pane-on-left'
   'ctrl-k j': 'window:focus-pane-below'
   'ctrl-k k': 'window:focus-pane-above'
   'ctrl-k l': 'window:focus-pane-on-right'
+# split pane and move active item
+  'ctrl-k v': 'pane:split-right-and-move-active-item'
+  'ctrl-k s': 'pane:split-down-and-move-active-item'
 
 # autocomplete-plus
 # disable "Use Core Movement Commands" first
