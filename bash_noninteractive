@@ -1,0 +1,5 @@
+# for ssh hostname <command>
+# and mpirun over SSH
+# see https://www.open-mpi.org/faq/?category=running#run-prereqs
+
+export PATH=$HOME/.linuxbrew/bin:$PATH
