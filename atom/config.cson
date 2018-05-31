@@ -2,6 +2,7 @@
   "atom-beautify":
     cpp:
       configPath: "~/.uncrustify.cfg"
+      default_beautifier: "clang-format"
     js:
       default_beautifier: "ESLint Fixer"
     markdown:
@@ -29,6 +30,7 @@
     ]
   editor:
     fontFamily: "\"Ricty Diminished\""
+    scrollPastEnd: true
   "exception-reporting":
     userId: "00d10b12-5a42-41ef-84e7-32747c9872c3"
   fonts:
