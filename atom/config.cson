@@ -3,13 +3,19 @@
     cpp:
       configPath: "~/.uncrustify.cfg"
       default_beautifier: "clang-format"
+    java:
+      configPath: "~/.uncrustify.cfg"
     js:
       default_beautifier: "ESLint Fixer"
     markdown:
       default_beautifier: "Prettier"
     vue:
       default_beautifier: "ESLint Fixer"
+  "autocomplete-clang":
+    includeNonDoxygenCommentsAsDocumentation: true
+    "std c++": "c++17"
   "autocomplete-plus":
+    maxVisibleSuggestions: 20
     suppressActivationForEditorClasses: [
       "vim-mode-plus.normal-mode"
       "vim-mode-plus.visual-mode"
@@ -21,6 +27,8 @@
     disabledPackages: [
       "markdown-preview"
       "language-gfm"
+      "autocomplete-clang"
+      "linter-clang"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
@@ -47,6 +55,9 @@
     ]
   "line-ending-selector":
     defaultLineEnding: "LF"
+  linter: {}
+  "linter-clang":
+    clangDefaultCppFlags: "-Wall -std=c++17"
   "linter-eslint":
     ignoreFixableRulesWhileTyping: true
     scopes: [
@@ -66,7 +77,7 @@
   "seti-syntax": {}
   "seti-ui": {}
   "tree-view":
-    hideVcsIgnoredFiles: true
+    squashDirectoryNames: true
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true
     notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true

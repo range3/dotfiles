@@ -40,6 +40,8 @@
 # beautify
 'atom-text-editor':
   'ctrl-i': 'atom-beautify:beautify-editor'
+"atom-text-editor[data-grammar='source cpp']":
+  'ctrl-i': 'atom-beautify:beautify-language-c++'
 
 # force use ESLint Fixer engine provided atom-beautify for js in .vue files
 # "atom-text-editor[data-grammar='text html vue']":
