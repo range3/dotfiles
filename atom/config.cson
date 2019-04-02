@@ -59,7 +59,9 @@
   "linter-clang":
     clangDefaultCppFlags: "-Wall -std=c++17"
   "linter-eslint":
-    ignoreFixableRulesWhileTyping: true
+    autofix:
+      fixOnSave: true
+      ignoreFixableRulesWhileTyping: true
     scopes: [
       "source.js"
       "source.jsx"
@@ -77,6 +79,7 @@
   "seti-syntax": {}
   "seti-ui": {}
   "tree-view":
+    hideVcsIgnoredFiles: true
     squashDirectoryNames: true
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true
