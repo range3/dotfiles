@@ -9,8 +9,11 @@
       default_beautifier: "ESLint Fixer"
     markdown:
       default_beautifier: "Prettier"
+    rust: {}
     vue:
       default_beautifier: "ESLint Fixer"
+  "atom-ide-ui":
+    "atom-ide-diagnostics-ui": {}
   "autocomplete-clang":
     includeNonDoxygenCommentsAsDocumentation: true
     "std c++": "c++17"
@@ -24,17 +27,19 @@
     ]
     useCoreMovementCommands: false
   core:
+    colorProfile: "srgb"
     disabledPackages: [
       "markdown-preview"
       "language-gfm"
       "autocomplete-clang"
       "linter-clang"
+      "linter"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
     themes: [
       "one-dark-ui"
-      "seti-syntax"
+      "base16-tomorrow-dark-theme"
     ]
   editor:
     fontFamily: "\"Ricty Diminished\""
@@ -43,6 +48,8 @@
     userId: "00d10b12-5a42-41ef-84e7-32747c9872c3"
   fonts:
     fontFamily: "M+ Light"
+  "ide-rust":
+    rlsToolchain: "nightly-2019-03-23"
   "language-dotenv":
     dotenvFileNames: [
       ".env"
@@ -70,7 +77,8 @@
       "source.js-semantic"
       "text.html.vue"
     ]
-  "linter-ui-default": {}
+  "linter-ui-default":
+    panelHeight: 250
   "markdown-preview":
     useGitHubStyle: true
   "markdown-preview-plus":
@@ -78,12 +86,13 @@
   "one-dark-ui": {}
   "seti-syntax": {}
   "seti-ui": {}
+  "toggle-gutter":
+    showGutters: false
   "tree-view":
     hideVcsIgnoredFiles: true
     squashDirectoryNames: true
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true
-    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     wrapLeftRightMotion: true
   welcome:
     showOnStartup: false
@@ -96,3 +105,6 @@
 ".html.text.vue":
   editor:
     tabType: "auto"
+".rust.source":
+  editor:
+    tabLength: 2

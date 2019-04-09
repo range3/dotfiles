@@ -37,10 +37,10 @@
   'ctrl-p': 'autocomplete-plus:move-up'
   'ctrl-n': 'autocomplete-plus:move-down'
 
-# Emmet
-# unset because of conflicting with markdown-preview-plus
-'atom-text-editor:not([mini])':
-  'ctrl-shift-M': 'unset!'
+# markdown-preview-plus
+# overwriting because of conflicting with emmet
+'atom-text-editor, webview.markdown-preview-plus':
+  'ctrl-shift-M': 'markdown-preview-plus:toggle'
 
 # beautify
 'atom-text-editor':
