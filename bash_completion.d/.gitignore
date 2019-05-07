@@ -1,2 +1,3 @@
 /yarn-completion.bash
 /rustup.bash-completion
+/cargo.bash-completion
