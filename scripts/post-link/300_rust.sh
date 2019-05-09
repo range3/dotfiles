@@ -5,5 +5,3 @@ fi
 
 ${HOME}/.cargo/bin/rustup completions bash rustup \
   > ${HOME}/.bash_completion.d/rustup.bash-completion
-${HOME}/.cargo/bin/rustup completions bash cargo \
-  > ${HOME}/.bash_completion.d/cargo.bash-completion
