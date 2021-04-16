@@ -1,6 +1,6 @@
 DOTPATH     := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-CANDIDATES  := $(wildcard [!.]*) $(wildcard atom/*)
-EXCLUSIONS  := Makefile README.md scripts atom
+CANDIDATES  := $(wildcard [!.]*)
+EXCLUSIONS  := Makefile README.md scripts
 DOTFILES    := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
