@@ -12,7 +12,6 @@ function usage() {
 
    optional arguments:
      -h, --help           show this help message and exit
-     -f, --force          install dotfiles, must pass this option explicitly 
      -v, --verbose        increase the verbosity of the bash script
      -n, --dry-run        do a dry run, dont change any files, default true
 
@@ -20,7 +19,7 @@ EOS
 }
 
 POSITIONAL=()
-DRYRUN="true"
+DRYRUN="false"
 VERBOSE="false"
 while [[ $# -gt 0 ]]; do
   key="$1"
@@ -30,15 +29,12 @@ while [[ $# -gt 0 ]]; do
     usage
     exit
     ;;
-  -f | --force)
-    DRYRUN="false"
-    shift
-    ;;
   -v | --verbose)
     VERBOSE="true"
     shift
     ;;
   -n | --dry-run)
+    DRYRUN="true"
     shift
     ;;
   *) # unknown option
@@ -98,8 +94,7 @@ EOS
 }
 
 if "${DRYRUN}"; then
-  echo "Dry run mode defaults to true. nothing to do." 1>&2
-  echo "Pass the -f option to install dotfiles." 1>&2
+  echo "Dry run mode." 1>&2
   echo "" 1>&2
 fi
 
