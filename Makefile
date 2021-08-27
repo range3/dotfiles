@@ -1,6 +1,6 @@
 DOTPATH     := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES  := $(wildcard [!.]*)
-EXCLUSIONS  := Makefile README.md scripts THIRD-PARTY-LICENSES.md
+EXCLUSIONS  := Makefile README.md scripts THIRD-PARTY-LICENSES.md dotfiles
 DOTFILES    := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
