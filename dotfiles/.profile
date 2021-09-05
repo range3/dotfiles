@@ -48,6 +48,13 @@ if command -v anyenv 1>/dev/null 2>&1; then
   eval "$(anyenv init -)"
 fi
 
+# spack
+spack_user_root="${HOME}/.cache/spack"
+if [ -r "${spack_user_root}/share/spack/setup-env.sh" ]; then
+    . "${spack_user_root}/share/spack/setup-env.sh"
+fi
+unset spack_user_root
+
 # activate default spack env
 if [ -n "$DOTFILES_DEFAULT_SPACK_ENV" ]; then
   if command -v spack 1>/dev/null 2>&1; then

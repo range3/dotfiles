@@ -1,0 +1,10 @@
+#!/bin/bash
+
+spack_user_root="${HOME}/.cache/spack"
+
+if [ -s "${spack_user_root}" ]; then
+  cd "${spack_user_root}"
+  git pull
+else
+  git clone https://github.com/spack/spack.git "${spack_user_root}"
+fi
