@@ -1,5 +1,9 @@
 # dotfiles
 ## Usage
 ```bash
-$ make install
+# help
+$ ./install.sh -h
+
+# install
+$ ./install.sh
 ```

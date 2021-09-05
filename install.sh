@@ -9,12 +9,12 @@ TIMESTAMP=$(date +%Y.%m.%d-%H.%M.%S)
 function usage() {
   cat <<EOS
 
-   Usage: ${SCRIPT_NAME} [--force] [--verbose] [--dry-run]
+   Usage: ${SCRIPT_NAME} [--verbose] [--dry-run]
 
    optional arguments:
      -h, --help           show this help message and exit
      -v, --verbose        increase the verbosity of the bash script
-     -n, --dry-run        do a dry run, dont change any files, default true
+     -n, --dry-run        do a dry run, dont change any files
 
 EOS
 }
