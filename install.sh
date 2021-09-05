@@ -3,6 +3,7 @@ SCRIPT_NAME=$(basename "${BASH_SOURCE:-$0}")
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-$0}")" &>/dev/null && pwd)"
 PROJECT_ROOT_DIR="$(cd "${SCRIPT_DIR}" &>/dev/null && pwd)"
 DOTFILES_DIR="${PROJECT_ROOT_DIR}/dotfiles"
+DOTFILES_PRIVATE_DIR="${PROJECT_ROOT_DIR}/externals/dotfiles-private/dotfiles"
 TIMESTAMP=$(date +%Y.%m.%d-%H.%M.%S)
 
 function usage() {
@@ -75,7 +76,7 @@ backup_recursively() {
 
   if [ -e "${src}" ]; then
     echo "backup: $src $dest" | vcat -
-    dryrun_command cp -R $src $dest
+    dryrun_command cp -RT $src $dest
   else
     echo "The source file/directory not found, no need to backup: ${src}" | vcat - 1>&2
   fi
@@ -85,11 +86,11 @@ backup_recursively() {
 }
 
 write_marker_file() {
-  echo "Write marker file. ${MARKER_FILE}"
-    cat - <<EOS | tee ${MARKER_FILE}
+  echo "Write marker file. ${MARKER_FILE}" | vcat -
+  cat - <<EOS > ${MARKER_FILE}
 EOS
   for key in "${!BACKED_UP_DOTFILES[@]}"; do
-    echo "BACKED_UP_DOTFILES[\""${key}"\"]=\""${BACKED_UP_DOTFILES[${key}]}"\"" | tee -a ${MARKER_FILE}
+    echo "BACKED_UP_DOTFILES[\""${key}"\"]=\""${BACKED_UP_DOTFILES[${key}]}"\"" >> ${MARKER_FILE}
   done
 }
 
@@ -112,7 +113,7 @@ if [ -f "${MARKER_FILE}" ]; then
 fi
 
 # backup original dotfiles
-root_entries=$(ls -1a ${DOTFILES_DIR}/ | tail -n +3)
+root_entries=$(ls -1A ${DOTFILES_DIR}/; ls -1A ${DOTFILES_PRIVATE_DIR}/)
 for root_entry in ${root_entries}; do
   original_path="${HOME}/${root_entry}"
   backup_recursively "${original_path}"
@@ -121,13 +122,6 @@ done
 # Write marker file
 dryrun_command write_marker_file
 
-# List dotfiles in this repo
-dotfiles=$(find ${DOTFILES_DIR}/ -type f)
-
 # just overwrite dotfiles
-for src in $dotfiles; do
-  relative_path=$(realpath --relative-to "${DOTFILES_DIR}" "${src}")
-  dest="${HOME}/${relative_path}"
-  dryrun_command mkdir -p $(dirname ${dest})
-  dryrun_command cp ${src} ${dest}
-done
+dryrun_command cp -RT --preserve=mode "${DOTFILES_DIR}" "${HOME}"
+dryrun_command cp -RT --preserve=mode "${DOTFILES_PRIVATE_DIR}" "${HOME}"

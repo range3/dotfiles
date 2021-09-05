@@ -17,5 +17,3 @@
   excludesfile = ~/.gitignore
 [push]
   default = upstream
-[credential]
-  helper = cache

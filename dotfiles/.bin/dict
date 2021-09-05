@@ -1,0 +1,33 @@
+#!/bin/bash
+# GENE95 dictionary
+# http://www.namazu.org/~tsuchiya/sdic/data/gene.html
+
+DICT_PATH="${HOME}/.gene.txt"
+if [ ! -f "${DICT_PATH}" ]; then
+  echo "The GENE95 dictionary file does not exist." >&2
+  echo "Download it to ${DICT_PATH} yourself." >&2
+  echo "http://www.namazu.org/~tsuchiya/sdic/data/gene.html" >&2
+  exit 1
+fi
+
+if [ $# -lt 1 ]; then
+  echo "Usage: dict word" >&2
+  exit 1
+fi
+
+function isAlphaNum() {
+  compressed="$(echo "$1" | sed -e 's/[^[:alnum:]]//g')"
+  if [ "$compressed" != "$1" ]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+if isAlphaNum "$1"; then
+  # English to Japanese
+  grep "$*" "${DICT_PATH}" -E -A 1 -wi --color=always | less -R -FX
+else
+  # Japanese to English
+  grep "$*" "${DICT_PATH}" -E -B 1 -wi --color=always | less -R -FX
+fi

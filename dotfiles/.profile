@@ -1,29 +1,51 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
-
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-  # include .bashrc if it exists
-  if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
+function addpath() {
+  if [ -d "$1" ]; then
+    case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="$1:$PATH" ;; esac
   fi
+}
+
+addpath "$HOME/.bin"
+addpath "$HOME/bin"
+addpath "$HOME/.local/bin"
+addpath "$HOME/local/bin"
+addpath "$HOME/.sbin"
+addpath "$HOME/sbin"
+addpath "$HOME/.local/sbin"
+addpath "$HOME/local/sbin"
+
+# keychain
+if command -v keychain 1>/dev/null 2>&1; then
+  keychain \
+    --quiet \
+    --ignore-missing \
+    $(find "$HOME/.ssh" -name 'id_*' -and -not -name '*.pub')
+
+  eval "$(keychain --quiet --eval)"
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-  PATH="$HOME/bin:$PATH"
+# Editor
+if command -v vim 1>/dev/null 2>&1; then
+  export EDITOR=vim
+elif command -v vi 1>/dev/null 2>&1; then
+  export EDITOR=vi
+fi
+export GIT_EDITOR=${EDITOR}
+export SVN_EDITOR=${EDITOR}
+
+# Bookmarks
+if [ -d "$HOME/.bookmarks" ]; then
+  export CDPATH=".:$HOME/.bookmarks:/"
+  alias goto="cd -P"
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-  PATH="$HOME/.local/bin:$PATH"
+# anyenv
+if [ -d "$HOME/.anyenv" ] ; then
+  addpath "$HOME/.anyenv/bin"
+fi
+if command -v anyenv 1>/dev/null 2>&1; then
+  eval "$(anyenv init -)"
 fi
 
 # activate default spack env
@@ -34,3 +56,15 @@ if [ -n "$DOTFILES_DEFAULT_SPACK_ENV" ]; then
     fi
   fi
 fi
+
+# load node-specific profile
+node_specific_profile="$HOME/.config/node_specific_profile/$(hostname -s)"
+if [ -n "$BASH_VERSION" -a -r "$node_specific_profile/.bash_profile" ]; then
+  source "$node_specific_profile/.bash_profile"
+elif [ -r "$node_specific_profile/.profile" ]; then
+  source "$node_specific_profile/.profile"
+fi
+unset node_specific_profile
+
+# clean up
+unset addpath
