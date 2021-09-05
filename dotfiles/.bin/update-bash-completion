@@ -5,13 +5,16 @@
 # Ensure the directory exists
 mkdir -p "${BASH_COMPLETION_USER_DIR}/completions/"
 
-urls=(
-  'https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash'
-  'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash'
-  'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh'
-)
+# urls=(
+#   'https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash'
+#   'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash'
+#   'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh'
+# )
 
-cd "${BASH_COMPLETION_USER_DIR}/completions/"
-for url in "${urls[@]}"; do
-  curl -O $url
-done
+# yarn
+curl -o "${BASH_COMPLETION_USER_DIR}/completions/yarn.bash" \
+  'https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash'
+
+# git
+# curl -o "${BASH_COMPLETION_USER_DIR}/completions/git.bash" \
+#   'https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash'

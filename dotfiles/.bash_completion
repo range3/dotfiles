@@ -1,10 +1,14 @@
-_goto() {
-  local opt cur
-  COMPREPLY=()
-  if [ $COMP_CWORD -lt 2 ]; then
-    opt=$(ls -1 "$HOME/.bookmarks" 2>/dev/null)
-    cur="${COMP_WORDS[${COMP_CWORD}]}"
-    COMPREPLY=($(compgen -W "${opt}" -- "${cur}"))
+_load_bash_completion_d() {
+  local bcfile
+  if [ -d "$1" ]; then
+    for bcfile in $1/*; do
+      [ -f "$bcfile" ] && . $bcfile
+    done
   fi
 }
-complete -F _goto goto
+
+_load_bash_completion_d "$HOME/.bash_completion.d"
+_load_bash_completion_d \
+  "${BASH_COMPLETION_USER_DIR:-"${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion"}/completions"
+
+unset _load_bash_completion_d
