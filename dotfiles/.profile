@@ -54,7 +54,7 @@ if command -v anyenv 1>/dev/null 2>&1; then
 fi
 
 # spack
-spack_user_root="${HOME}/.cache/spack"
+spack_user_root=${SPACK_ROOT:-"${HOME}/.cache/spack"}
 if [ -r "${spack_user_root}/share/spack/setup-env.sh" ]; then
     . "${spack_user_root}/share/spack/setup-env.sh"
 fi

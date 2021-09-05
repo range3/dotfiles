@@ -1,6 +1,6 @@
 #!/bin/bash
 
-spack_user_root="${HOME}/.cache/spack"
+spack_user_root=${SPACK_ROOT:-"${HOME}/.cache/spack"}
 
 if [ -s "${spack_user_root}" ]; then
   cd "${spack_user_root}"
