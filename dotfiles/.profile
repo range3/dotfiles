@@ -1,5 +1,10 @@
 #umask 022
 
+# load ~/.env
+if [ -r "$HOME/.env" ]; then
+  source "$HOME/.env"
+fi
+
 function addpath() {
   if [ -d "$1" ]; then
     case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="$1:$PATH" ;; esac
