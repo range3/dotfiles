@@ -65,9 +65,18 @@ function dryrun_command() {
   fi
 }
 
-backup_recursively() {
-  local src="$(realpath "$1")"
-  local dest="${BACKUP_DIR}/$(basename "${src}")"
+list_relative_file_path() {
+  local base_dir="$(realpath "$1")"
+  [ -d "${base_dir}" ] && \
+    find "${base_dir}/" -type f | xargs -r -L 1 realpath --relative-to="${base_dir}"
+}
+
+backup() {
+  local relative_file="$1"
+  local src_base_dir="${HOME}"
+  local dest_base_dir="${BACKUP_DIR}"
+  local src="${src_base_dir}/${relative_file}"
+  local dest="${dest_base_dir}/${relative_file}"
 
   if [ -n "${BACKED_UP_DOTFILES["${src}"]}" ]; then
     echo "This entry is already backed up. skipping. ${src}" | vcat -
@@ -75,8 +84,9 @@ backup_recursively() {
   fi
 
   if [ -e "${src}" ]; then
-    echo "backup: $src $dest" | vcat -
-    dryrun_command cp -RT $src $dest
+    echo "backup: $src to $dest" | vcat -
+    dryrun_command cd "${src_base_dir}" && \
+    dryrun_command cp --parents --preserve=mode "$relative_file" "$dest_base_dir"
   else
     echo "The source file/directory not found, no need to backup: ${src}" | vcat - 1>&2
   fi
@@ -112,11 +122,10 @@ if [ -f "${MARKER_FILE}" ]; then
   source "${MARKER_FILE}"
 fi
 
-# backup original dotfiles
-root_entries=$(ls -1A ${DOTFILES_DIR}/; ls -1A ${DOTFILES_PRIVATE_DIR}/)
-for root_entry in ${root_entries}; do
-  original_path="${HOME}/${root_entry}"
-  backup_recursively "${original_path}"
+# backup dotfiles in the home directory
+relpath_dotfiles=$(list_relative_file_path "${DOTFILES_DIR}"; list_relative_file_path "${DOTFILES_PRIVATE_DIR}")
+for relpath_dotfile in ${relpath_dotfiles}; do
+  backup ${relpath_dotfile}
 done
 
 # Write marker file
