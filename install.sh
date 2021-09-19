@@ -45,6 +45,12 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if [ ${#POSITIONAL[@]} -gt 0 ]; then
+  echo "Unknown options: ${POSITIONAL[@]}"
+  usage
+  exit
+fi
+
 DATA_DIR="${XDG_DATA_HOME:-"${HOME}/.local/share"}/dotfiles"
 STATE_DIR="${XDG_STATE_HOME:-"${HOME}/.local/state"}/dotfiles"
 BACKUP_DIR="${DATA_DIR}/backup"
