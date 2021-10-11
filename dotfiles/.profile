@@ -39,6 +39,9 @@ fi
 export GIT_EDITOR=${EDITOR}
 export SVN_EDITOR=${EDITOR}
 
+# TimeZone
+export TZ=Asia/Tokyo
+
 # Bookmarks
 if [ -d "$HOME/.bookmarks" ]; then
   export CDPATH=".:$HOME/.bookmarks:/"
