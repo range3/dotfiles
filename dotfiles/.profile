@@ -44,8 +44,7 @@ export TZ=Asia/Tokyo
 
 # Bookmarks
 if [ -d "$HOME/.bookmarks" ]; then
-  export CDPATH=".:$HOME/.bookmarks"
-  alias goto="cd -P"
+  alias goto='CDPATH="$HOME/.bookmarks" cd -P'
 fi
 
 # anyenv
