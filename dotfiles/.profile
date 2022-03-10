@@ -42,6 +42,10 @@ export SVN_EDITOR=${EDITOR}
 # TimeZone
 export TZ=Asia/Tokyo
 
+# locale
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
+
 # Bookmarks
 if [ -d "$HOME/.bookmarks" ]; then
   alias goto='CDPATH="$HOME/.bookmarks" cd -P'
