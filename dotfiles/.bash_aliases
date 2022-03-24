@@ -3,6 +3,11 @@ alias ch='pushd +1'
 alias b='bundle exec'
 alias less='less -R'
 
+# hexdump
+alias hexdump1='od -t x1 -Ax'
+alias hexdump2='od -t x2 -Ax'
+alias hexdump4='od -t x4 -Ax'
+
 # heroku
 alias heroku-rebuild="git commit --amend --no-edit; git push -f heroku master"
 
