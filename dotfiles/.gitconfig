@@ -27,5 +27,7 @@
   pager = less
 [push]
   default = upstream
+[pull]
+  ff = only
 [credential]
   helper = cache
