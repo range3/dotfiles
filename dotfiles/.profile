@@ -45,6 +45,9 @@ export TZ=Asia/Tokyo
 # locale
 export LANG=ja_JP.UTF-8
 
+# less
+export LESSCHARSET=utf-8
+
 # Bookmarks
 if [ -d "$HOME/.bookmarks" ]; then
   alias goto='CDPATH="$HOME/.bookmarks" cd -P'
