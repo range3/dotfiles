@@ -25,6 +25,7 @@
   email = white.line.oar@gmail.com
 [core]
   pager = less
+  quotepath = false
 [push]
   default = upstream
 [pull]
