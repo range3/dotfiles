@@ -3,6 +3,7 @@ alias ch='pushd +1'
 alias b='bundle exec'
 alias less='less -R'
 alias ec='exec code'
+alias ecode='exec code'
 
 # hexdump
 alias hexdump1='od -t x1 -Ax'
