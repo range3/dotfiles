@@ -31,11 +31,12 @@ set timeout
 set timeoutlen=200
 
 " tab
-set ts=2 sw=2
+set tabstop=2
+set shiftwidth=2
 set ai
+set expandtab
 set smartindent
 set smarttab
-set expandtab
 
 " cursor movement
 set whichwrap=b,s,h,l,<,>,[,]
@@ -48,7 +49,9 @@ set hidden
 
 " search
 set hlsearch
+set ignorecase
 set smartcase
+nmap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc> " clear highlight
 
 " backup and swap dir
 set backupdir=~/.vim/backup//
