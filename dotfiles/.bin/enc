@@ -5,13 +5,13 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 src="$1"
-dst="${2:--}"
+dst="${2:-$(basename "$src").tar.enc}"
 
-openssl enc -e \
-  -aes-256-cbc \
-  -md sha512 \
-  -pbkdf2 \
-  -iter 100000 \
-  -salt \
-  -in "$src" \
-  -out "$dst"
+tar cf - "$src" \
+  | openssl enc -e \
+    -aes-256-cbc \
+    -md sha512 \
+    -pbkdf2 \
+    -iter 100000 \
+    -salt \
+    -out "$dst"
