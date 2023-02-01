@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: dec src dst" >&2
+  exit 1
+fi
+src="$1"
+dst="${2:--}"
+
+openssl enc -d \
+  -aes-256-cbc \
+  -md sha512 \
+  -pbkdf2 \
+  -iter 100000 \
+  -salt \
+  -in "$src" \
+  -out "$dst"
