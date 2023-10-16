@@ -1,0 +1,34 @@
+#!/bin/bash
+set -eu
+
+# Ensure English output
+export LC_ALL=C
+
+# Fetch GPG key and capture the result
+result=$(gpg --fetch-keys https://github.com/range3.gpg 2>&1)
+
+# Display the result with preserved newlines
+echo -e "$result"
+
+# Extract imported key IDs
+imported_keys=$(echo -e "$result" | grep -o -P '[A-F0-9]{16}(?=:.*imported)')
+
+# Fetch the list of keys with fingerprints
+key_list=$(gpg --list-keys --keyid-format long)
+
+# Prepare a temporary file for ownertrust settings
+ownertrust_file=$(mktemp)
+
+# Match key IDs to fingerprints and update ownertrust_file
+for key_id in $imported_keys; do
+  fingerprint=$(echo -e "$key_list" | awk -v id="$key_id" 'BEGIN {found=0} /pub/ {if ($2 ~ id) found=1; next} found && /^[[:space:]]+[0-9A-F]+/ {print $1; exit}')
+  echo "$fingerprint:6:" >> "$ownertrust_file"
+done
+
+# Import the ownertrust settings
+gpg --import-ownertrust < "$ownertrust_file"
+
+# Clean up
+rm -f "$ownertrust_file"
+
+gpg --list-keys --keyid-format long
