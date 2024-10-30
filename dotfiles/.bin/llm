@@ -6,7 +6,23 @@ CONTAINER_NAME="llm-container"
 
 CONFIG_VOLUME="llm-config"
 
-docker run --rm -i \
-  --name "$CONTAINER_NAME" \
-  -v "$CONFIG_VOLUME:/home/llm/.config" \
-  "$IMAGE_NAME" "$@"
+cmd_docker_run=(
+  docker run
+  --rm
+  --name "$CONTAINER_NAME"
+  -v "$CONFIG_VOLUME:/home/llm/.config"
+)
+
+if [ -t 0 ]; then
+  cmd_docker_run+=(-it)
+else
+  cmd_docker_run+=(-i)
+fi
+
+cmd_llm=(
+  "${cmd_docker_run[@]}"
+  "$IMAGE_NAME"
+  "$@"
+)
+
+"${cmd_llm[@]}"
