@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+zip_name=duckdb_cli-linux-amd64.zip
+api_url=https://api.github.com/repos/duckdb/duckdb/releases/latest
+zip_url=$(curl -s $api_url | jq -r ".assets[] | select(.name == \"$zip_name\") | .browser_download_url")
+
+BINDIR="${HOME}/.bin"
+TEMPDIR=$(mktemp -d)
+cleanup() {
+    rm -rf "${TEMPDIR}"
+}
+trap cleanup EXIT
+
+curl -sSL "$zip_url" -o "${TEMPDIR}/duckdb.zip"
+(cd "${TEMPDIR}" && unzip -q duckdb.zip)
+chmod +x "${TEMPDIR}/duckdb"
+mv "${TEMPDIR}/duckdb" "${BINDIR}/"
