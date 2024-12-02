@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+
+curl https://mise.run | MISE_INSTALL_PATH=$HOME/.bin/mise sh
