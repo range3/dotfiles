@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Default settings
+GITHUB_USER="range3"
+SSH_KEY="$HOME/.ssh/id_rsa"
+
+# Help message
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "Usage:"
+    echo "  Encrypt: $(basename $0) [file/dir]"
+    echo "  Decrypt: $(basename $0) -d [encrypted_file]"
+    exit 0
+fi
+
+# Check arguments
+if [ $# -lt 1 ]; then
+    echo "Error: insufficient arguments"
+    echo "Usage: $(basename $0) [-d] [target]"
+    exit 1
+fi
+
+# Determine command mode
+if [ "$1" = "-d" ]; then
+    decrypt_mode=true
+    target="$2"
+    if [ -z "$target" ]; then
+        echo "Error: please specify a file to decrypt"
+        exit 1
+    fi
+else
+    decrypt_mode=false
+    target="$1"
+fi
+
+# Remove trailing slash from directory names
+target=${target%/}
+
+if $decrypt_mode; then
+    # Decryption mode
+    if [[ "$target" == *.tar.gz.age ]]; then
+        # Directory archive case
+        age -d -i "$SSH_KEY" "$target" | tar xzf -
+        echo "Decryption and extraction complete"
+    elif [[ "$target" == *.age ]]; then
+        # Single file case
+        output="${target%.age}"
+        age -d -i "$SSH_KEY" "$target" > "$output"
+        echo "Decryption complete: $output"
+    else
+        echo "Error: filename must end with .age"
+        exit 1
+    fi
+else
+    # Encryption mode
+    if [ -d "$target" ]; then
+        # Directory case
+        tar czf - "$target" | age -R <(curl -s "https://github.com/$GITHUB_USER.keys") > "${target}.tar.gz.age"
+        echo "Encryption complete: ${target}.tar.gz.age"
+    elif [ -f "$target" ]; then
+        # File case
+        age -R <(curl -s "https://github.com/$GITHUB_USER.keys") "$target" > "${target}.age"
+        echo "Encryption complete: ${target}.age"
+    else
+        echo "Error: specified file/directory not found"
+        exit 1
+    fi
+fi
