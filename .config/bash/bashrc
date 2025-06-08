@@ -1,0 +1,25 @@
+# history
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTTIMEFORMAT='%F %T '
+shopt -s histappend
+
+# function
+prepend_var() { [[ -d "$2" && ! ":${!1}:" =~ ":$2:" ]] && printf -v "$1" "$2${!1:+":${!1}"}"; }
+append_var()  { [[ -d "$2" && ! ":${!1}:" =~ ":$2:" ]] && printf -v "$1" "${!1:+"${!1}:"}$2"; }
+
+# alias
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
+
+# completion
+if [ -f ~/.bash_completion ]; then
+  source ~/.bash_completion
+fi
+
+# mise
+if [ -f ~/.local/bin/mise ]; then
+  eval "$(~/.local/bin/mise activate bash)"
+fi
