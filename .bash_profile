@@ -9,7 +9,7 @@ prepend_var PATH "$HOME/.local/sbin"
 
 # Editor
 if command -v vim 1>/dev/null 2>&1; then
-  export EDITOR=VIM
+  export EDITOR=vim
 elif command -v vi 1>/dev/null 2>&1; then
   export EDITOR=vi
 fi
