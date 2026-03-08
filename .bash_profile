@@ -3,9 +3,13 @@ if [ -r ~/.bashrc ]; then
   case $- in *i*) . ~/.bashrc ;; esac
 fi
 
+prepend_var() { [[ -d "$2" && ! ":${!1}:" =~ ":$2:" ]] && printf -v "$1" "$2${!1:+":${!1}"}"; }
+append_var()  { [[ -d "$2" && ! ":${!1}:" =~ ":$2:" ]] && printf -v "$1" "${!1:+"${!1}:"}$2"; }
+
 # envs
 prepend_var PATH "$HOME/.local/bin"
 prepend_var PATH "$HOME/.local/sbin"
+prepend_var PATH "$HOME/.cache/npm-global/bin"
 
 # Editor
 if command -v vim 1>/dev/null 2>&1; then

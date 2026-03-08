@@ -6,8 +6,6 @@ HISTTIMEFORMAT='%F %T '
 shopt -s histappend
 
 # function
-prepend_var() { [[ -d "$2" && ! ":${!1}:" =~ ":$2:" ]] && printf -v "$1" "$2${!1:+":${!1}"}"; }
-append_var()  { [[ -d "$2" && ! ":${!1}:" =~ ":$2:" ]] && printf -v "$1" "${!1:+"${!1}:"}$2"; }
 
 # alias
 if [ -f ~/.bash_aliases ]; then
